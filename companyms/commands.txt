@@ -1,0 +1,56 @@
+{
+    "id": "1",
+    "title": "Software ingineer",
+    "description": "test descr",
+    "minSalary": "30000",
+    "maxSalary": "400000",
+    "location": "CA"
+  }
+
+http://localhost:8080/h2-console
+
+{
+    "name": "Company 1",
+    "description": "Description 1"
+  }
+
+Json formatter
+
+./mvnw spring-boot:build-image "-Dspring-boot.build-image.imageName=<IMAGE-NAME>"
+./mvnw spring-boot:build-image "-Dspring-boot.build-image.imageName=levanovroman/jodappimage"
+
+docker push levanovroman/jodappimage
+
+docker run -d --name db -e POSTGRES_PASSWORD=admin postgres
+docker run -d --name pgadmin -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=admin dpage/pgadmin4
+
+docker pull <image>
+docker run -it -d -p <host-port>:<container-port> --name <name> <image>
+docker stop <container-id/container-name>
+docker start <container-id/container-name>
+docker rm <container-id/container-name>
+docker rm -f <container-id/container-name> // принудительное удаление
+docker rmi <image-id/image-name>
+docker ps
+docker ps -a
+docker images
+docker exec -it <container-id/container-name> bash // доступ к запущенному контейнеру
+docker exec -it pgadmin ping db // проверка связи
+docker build -t <username/image> . // создание образа с dockerfile из текущего каталога
+docker logs <container-id/container-name> // получение журнала контейнера
+docker inspect <container-id/container-name> // подробная инфа о контейнере
+
+docker network create my-network // создать сеть
+docker run -d --name db --network my-network -e POSTGRES_PASSWORD=admin postgres
+docker run -d --name pgadmin --network my-network -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=admin dpage/pgadmin4
+docker exec -it pgadmin ping db
+
+Start the PostgreSQL service:
+docker run -d --name postgres_container -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -e PGDATA=/data/postgres -v postgres:/data/postgres -p 5432:5432 --network my-network --restart unless-stopped postgres
+
+Start the pgAdmin service:
+docker run -d --name pgadmin_container -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=admin -e PGADMIN_CONFIG_SERVER_MODE=False -v pgadmin:/var/lib/pgadmin -p 5050:80 --network my-network --restart unless-stopped dpage/pgadmin4
+
+docker run -d -p 9411:9411 openzipkin/zipkin
+
+

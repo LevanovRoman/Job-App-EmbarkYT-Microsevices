@@ -8,14 +8,10 @@ import com.myapp.jobms.job.clients.ReviewClient;
 import com.myapp.jobms.job.dto.JobDTO;
 import com.myapp.jobms.job.external.Company;
 import com.myapp.jobms.job.mapper.JobMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import com.myapp.jobms.job.external.Review;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,13 +19,9 @@ import java.util.stream.Collectors;
 @Service
 public class JobServiceImpl implements JobService {
 
-    private JobRepository jobRepository;
-
-    @Autowired
-    RestTemplate restTemplate;
-
-    private CompanyClient companyClient;
-    private ReviewClient reviewClient;
+    private final JobRepository jobRepository;
+    private final CompanyClient companyClient;
+    private final ReviewClient reviewClient;
 
     public JobServiceImpl(JobRepository jobRepository, CompanyClient companyClient, ReviewClient reviewClient) {
         this.jobRepository = jobRepository;
@@ -40,9 +32,13 @@ public class JobServiceImpl implements JobService {
     @Override
     public List<JobDTO> findAll() {
         List<Job> jobs = jobRepository.findAll();
-//        List<JobWithCompanyDTO> jobWithCompanyDTOs = new ArrayList<>();
-
-        return jobs.stream().map(this::convertToDto).collect(Collectors.toList());
+        List<JobDTO> jobDTOs = new ArrayList<>();
+        for (Job job : jobs){
+            JobDTO jobDTO = convertToDto(job);
+            jobDTOs.add(jobDTO);
+        }
+//        return jobs.stream().map(this::convertToDto).collect(Collectors.toList());
+        return jobDTOs;
     }
 
     private JobDTO convertToDto(Job job){
