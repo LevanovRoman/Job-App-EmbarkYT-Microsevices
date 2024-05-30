@@ -8,6 +8,7 @@ import com.myapp.jobms.job.clients.ReviewClient;
 import com.myapp.jobms.job.dto.JobDTO;
 import com.myapp.jobms.job.external.Company;
 import com.myapp.jobms.job.mapper.JobMapper;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.stereotype.Service;
 import com.myapp.jobms.job.external.Review;
 
@@ -30,16 +31,18 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
+    @CircuitBreaker(name = "companyBreaker", fallbackMethod = "companyBreakerFallback")
     public List<JobDTO> findAll() {
         List<Job> jobs = jobRepository.findAll();
-        List<JobDTO> jobDTOs = new ArrayList<>();
-        for (Job job : jobs){
-            JobDTO jobDTO = convertToDto(job);
-            jobDTOs.add(jobDTO);
-        }
-//        return jobs.stream().map(this::convertToDto).collect(Collectors.toList());
-        return jobDTOs;
+        return jobs.stream().map(this::convertToDto).collect(Collectors.toList());
     }
+
+    public List<String> companyBreakerFallback(Exception e){
+        List<String> list = new ArrayList<>();
+        list.add("Dummy");
+        return list;
+    }
+
 
     private JobDTO convertToDto(Job job){
 //        Company company = restTemplate.getForObject("http://COMPANY-SERVICE:8081/companies/" + job.getCompanyId(),

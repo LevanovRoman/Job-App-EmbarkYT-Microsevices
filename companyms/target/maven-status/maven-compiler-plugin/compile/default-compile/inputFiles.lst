@@ -1,0 +1,10 @@
+C:\Users\10390\Desktop\TRY\Spring_2\job-app-ms-embarkYT-microservice\companyms\src\main\java\com\myapp\companyms\company\clients\ReviewClient.java
+C:\Users\10390\Desktop\TRY\Spring_2\job-app-ms-embarkYT-microservice\companyms\src\main\java\com\myapp\companyms\company\Company.java
+C:\Users\10390\Desktop\TRY\Spring_2\job-app-ms-embarkYT-microservice\companyms\src\main\java\com\myapp\companyms\company\CompanyController.java
+C:\Users\10390\Desktop\TRY\Spring_2\job-app-ms-embarkYT-microservice\companyms\src\main\java\com\myapp\companyms\company\CompanyRepository.java
+C:\Users\10390\Desktop\TRY\Spring_2\job-app-ms-embarkYT-microservice\companyms\src\main\java\com\myapp\companyms\company\CompanyService.java
+C:\Users\10390\Desktop\TRY\Spring_2\job-app-ms-embarkYT-microservice\companyms\src\main\java\com\myapp\companyms\company\dto\ReviewMessage.java
+C:\Users\10390\Desktop\TRY\Spring_2\job-app-ms-embarkYT-microservice\companyms\src\main\java\com\myapp\companyms\company\impl\CompanyServiceImpl.java
+C:\Users\10390\Desktop\TRY\Spring_2\job-app-ms-embarkYT-microservice\companyms\src\main\java\com\myapp\companyms\company\messaging\RabbitMQConfiguration.java
+C:\Users\10390\Desktop\TRY\Spring_2\job-app-ms-embarkYT-microservice\companyms\src\main\java\com\myapp\companyms\company\messaging\ReviewMessageConsumer.java
+C:\Users\10390\Desktop\TRY\Spring_2\job-app-ms-embarkYT-microservice\companyms\src\main\java\com\myapp\companyms\CompanymsApplication.java

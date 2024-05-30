@@ -16,10 +16,21 @@ http://localhost:8080/h2-console
 
 Json formatter
 
-./mvnw spring-boot:build-image "-Dspring-boot.build-image.imageName=<IMAGE-NAME>"
-./mvnw spring-boot:build-image "-Dspring-boot.build-image.imageName=levanovroman/jodappimage"
+mvn clean package
+./mvnw package
 
-docker push levanovroman/jodappimage
+jar -tf ./target/companyms-0.0.1-SNAPSHOT.jar
+java -jar ./target/companyms-0.0.1-SNAPSHOT.jar   // запуск
+
+./mvnw spring-boot:build-image "-Dspring-boot.build-image.imageName=<IMAGE-NAME>"
+./mvnw spring-boot:build-image "-Dspring-boot.build-image.imageName=levanovroman/servicereg"
+./mvnw spring-boot:build-image "-Dspring-boot.build-image.imageName=levanovroman/company-ms"
+./mvnw spring-boot:build-image "-Dspring-boot.build-image.imageName=levanovroman/review-ms"
+./mvnw spring-boot:build-image "-Dspring-boot.build-image.imageName=levanovroman/job-ms"
+./mvnw spring-boot:build-image "-Dspring-boot.build-image.imageName=levanovroman/gateway-ms"
+./mvnw spring-boot:build-image "-Dspring-boot.build-image.imageName=levanovroman/config-server-ms"
+
+docker push levanovroman/servicereg
 
 docker run -d --name db -e POSTGRES_PASSWORD=admin postgres
 docker run -d --name pgadmin -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=admin dpage/pgadmin4
@@ -52,5 +63,12 @@ Start the pgAdmin service:
 docker run -d --name pgadmin_container -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=admin -e PGADMIN_CONFIG_SERVER_MODE=False -v pgadmin:/var/lib/pgadmin -p 5050:80 --network my-network --restart unless-stopped dpage/pgadmin4
 
 docker run -d -p 9411:9411 openzipkin/zipkin
+
+docker pull dockerhub.timeweb.cloud/library/alpine:latest
+{ "registry-mirrors" : [ "https://dockerhub.timeweb.cloud" ] }
+Linux, regular setup	/etc/docker/daemon.json
+Linux, rootless mode	~/.config/docker/daemon.json
+Windows	C:\ProgramData\docker\config\daemon.json
+Windows с Docker Desktop	C:\Users\<Пользователь>\.docker\daemon.json
 
 
