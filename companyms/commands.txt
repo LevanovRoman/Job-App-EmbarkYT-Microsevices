@@ -31,6 +31,10 @@ java -jar ./target/companyms-0.0.1-SNAPSHOT.jar   // запуск
 ./mvnw spring-boot:build-image "-Dspring-boot.build-image.imageName=levanovroman/config-server-ms"
 
 docker push levanovroman/servicereg
+docker push levanovroman/review-ms
+docker push levanovroman/job-ms
+docker push levanovroman/config-server-ms
+docker push levanovroman/gateway-ms
 
 docker run -d --name db -e POSTGRES_PASSWORD=admin postgres
 docker run -d --name pgadmin -e PGADMIN_DEFAULT_EMAIL=admin@admin.com -e PGADMIN_DEFAULT_PASSWORD=admin dpage/pgadmin4

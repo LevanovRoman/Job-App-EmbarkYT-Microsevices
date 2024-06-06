@@ -78,7 +78,6 @@ services:
       - postgres
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://servicereg:8761/eureka
   reviewms:
     image: levanovroman/review-ms:latest
     container_name: review
@@ -110,6 +109,7 @@ services:
     ports:
       - 9411:9411
     networks:
+      - microservice-network
       - postgres
   rabbitmq:
     image: rabbitmq:3-management
@@ -118,6 +118,7 @@ services:
       - 5672:5672
       - 15672:15672
     networks:
+      - microservice-network
       - postgres
 
 networks:
